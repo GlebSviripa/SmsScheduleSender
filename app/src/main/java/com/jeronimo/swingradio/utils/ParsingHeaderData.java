@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
  */
 public class ParsingHeaderData {
     public class TrackData {
-        public String artist = "";
-        public String title = "";
+        public String artist = "Unresolved";
+        public String title = "Unresolved";
     }
 
     protected URL streamUrl;

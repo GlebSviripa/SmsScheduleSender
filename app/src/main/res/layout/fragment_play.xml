@@ -1,133 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
-        android:elevation="2dp">
+        android:elevation="2dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/fragment_play_text_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/app_name"
-            android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimary"
             android:textSize="32dp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/imageView"
-        android:src="@mipmap/mic"
-        android:background="@android:color/black"
-        android:layout_weight="3" />
+        android:layout_weight="3"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/fragment_play_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/plastinka_result"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal" />
+    </FrameLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/black"
-        android:elevation="2dp">
+        android:elevation="2dp"
+        android:orientation="horizontal">
 
         <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ripple_animation"
             android:id="@+id/fragment_play_play_button"
-            android:clickable="true">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_play"
-                android:layout_centerInParent="true"
-                android:elevation="2dp"
-                android:translationZ="5dp"
-                android:clickable="false" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_animation"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle_button"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:drawable/ic_media_play"
+                    android:backgroundTint="@color/colorAccent"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/fragment_play_pause_button"
-            android:clickable="true">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_pause"
-                android:layout_centerInParent="true"
-                android:translationZ="5dp"
-                android:elevation="2dp"
-                android:clickable="false" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/ripple_animation"
-            android:id="@+id/fragment_play_reload_button"
-            android:clickable="true">
+            android:clickable="true"
+            android:orientation="horizontal">
 
-            <ImageButton
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_rotate"
                 android:layout_centerInParent="true"
-                android:translationZ="5dp"
-                android:elevation="2dp"
-                android:clickable="false" />
+                android:background="@drawable/circle_button"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:drawable/ic_media_pause"
+                    android:backgroundTint="@color/colorAccent"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_play_reload_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_animation"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle_button"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:drawable/ic_menu_rotate"
+                    android:backgroundTint="@color/colorAccent"/>
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
-        android:orientation="vertical"
+        android:id="@+id/fragment_play_info_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/black"
-        android:id="@+id/fragment_play_info_layout"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="vertical">
 
         <ProgressBar
+            android:id="@+id/fragment_play_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_play_progress_bar"
-            android:layout_centerInParent="true"
-            android:indeterminate="false"
             android:layout_alignParentTop="true"
-            android:visibility="invisible"
-            android:clickable="false" />
+            android:layout_centerInParent="true"
+            android:clickable="false"
+            android:indeterminate="false"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/fragment_play_text_song"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="false"
+            android:text="Listen! Dance! Relax!"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white"
-            android:textStyle="italic"
-            android:text="Current song..."
-            android:clickable="false" />
+            android:textStyle="italic" />
     </RelativeLayout>
 
 </LinearLayout>

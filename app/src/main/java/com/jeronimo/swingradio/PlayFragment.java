@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +38,7 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
     ProgressBar progressBar;
     RelativeLayout infoLayout;
     TextView infoTextView;
+    ImageView logoImageView;
     private Timer mTimer;
 
     @Override
@@ -50,8 +55,9 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
         reloadButton.setOnClickListener(this);
         progressBar = (ProgressBar)view.findViewById(R.id.fragment_play_progress_bar);
         infoLayout = (RelativeLayout)view.findViewById(R.id.fragment_play_info_layout);
-        infoLayout.setOnClickListener(this);
         infoTextView = (TextView)view.findViewById(R.id.fragment_play_text_song);
+        infoLayout.setOnClickListener(this);
+        logoImageView = (ImageView) view.findViewById(R.id.fragment_play_image_view);
 
         reloadMP();
         return view;
@@ -61,13 +67,17 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
     public void onPrepared(MediaPlayer mp) {
         mp.start();
         progressBar.setVisibility(View.INVISIBLE);
+        Animation logoAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_anim);
+        logoImageView.startAnimation(logoAnimation);
+        logoAnimation.setInterpolator(new LinearInterpolator());
 
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         releaseMP();
+        super.onDestroy();
+
     }
 
 
@@ -104,21 +114,34 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mTimer.cancel();
+        super.onDestroyView();
+
     }
 
     @Override
     public void onClick(View v) {
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_anim);
+        Animation logoAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_anim);
+        logoAnimation.setInterpolator(new LinearInterpolator());
+
         switch (v.getId())
         {
+
             case R.id.fragment_play_play_button:
+
+                logoImageView.startAnimation(logoAnimation);
                 mediaPlayer.start();
+                v.startAnimation(animation);
                 break;
             case R.id.fragment_play_pause_button:
+                logoImageView.clearAnimation();
                 mediaPlayer.pause();
+                v.startAnimation(animation);
                 break;
             case R.id.fragment_play_reload_button:
+                logoImageView.clearAnimation();
+                v.startAnimation(animation);
                 reloadMP();
                 break;
             case R.id.fragment_play_info_layout:
