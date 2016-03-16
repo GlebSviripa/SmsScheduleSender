@@ -7,6 +7,7 @@
 /captures
 .jks
 *.jks
+*.gradle
 bin/*
 gen/*
 build
