@@ -5,3 +5,9 @@
 .DS_Store
 /build
 /captures
+.jks
+bin/*
+gen/*
+build
+gen
+bin
