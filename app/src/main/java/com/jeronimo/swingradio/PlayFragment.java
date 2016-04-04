@@ -26,12 +26,10 @@ import java.util.TimerTask;
 /**
  * Created by gleb on 23.12.15.
  */
-public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedListener, View.OnClickListener
+public class PlayFragment extends Fragment implements  View.OnClickListener
 {
-
     private final static String DATA_STREAM = "http://swingradio.in.ua:80/live";
-    MediaPlayer mediaPlayer;
-    AudioManager am;
+
     RelativeLayout playButton;
     RelativeLayout pauseButton;
     RelativeLayout reloadButton;
@@ -45,7 +43,6 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_play, container, false);
-        am = (AudioManager)getActivity().getSystemService(getActivity().AUDIO_SERVICE);
 
         playButton = (RelativeLayout)view.findViewById(R.id.fragment_play_play_button);
         playButton.setOnClickListener(this);
@@ -63,53 +60,26 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
         return view;
     }
 
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-        mp.start();
-        progressBar.setVisibility(View.INVISIBLE);
-        Animation logoAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_anim);
-        logoImageView.startAnimation(logoAnimation);
-        logoAnimation.setInterpolator(new LinearInterpolator());
-
-    }
 
     @Override
     public void onDestroy() {
-        releaseMP();
         super.onDestroy();
 
     }
 
 
-    private void releaseMP() {
-        if (mediaPlayer != null) {
-            try {
-                mediaPlayer.release();
-                mediaPlayer = null;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
     private void reloadMP()
     {
         progressBar.setVisibility(View.VISIBLE);
-        releaseMP();
-        mediaPlayer = new MediaPlayer();
-
-        try {
-            mediaPlayer.setDataSource(DATA_STREAM);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(((MainActivity)getActivity()).service != null)
+        {
+            ((MainActivity)getActivity()).service.reloadMP();
         }
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setOnPreparedListener(this);
-        mediaPlayer.prepareAsync();
+
         mTimer = new Timer();
         MyTimerTask mTask = new MyTimerTask();
         mTimer.schedule(mTask, 1000, 12000);
-
-
     }
 
     @Override
@@ -131,12 +101,20 @@ public class PlayFragment extends Fragment implements MediaPlayer.OnPreparedList
             case R.id.fragment_play_play_button:
 
                 logoImageView.startAnimation(logoAnimation);
-                mediaPlayer.start();
+                if(((MainActivity)getActivity()).service != null)
+                {
+                    ((MainActivity)getActivity()).service.startMusic();
+                }
+
                 v.startAnimation(animation);
                 break;
             case R.id.fragment_play_pause_button:
                 logoImageView.clearAnimation();
-                mediaPlayer.pause();
+                if(((MainActivity)getActivity()).service != null)
+                {
+                    ((MainActivity)getActivity()).service.stopMusic();
+                }
+
                 v.startAnimation(animation);
                 break;
             case R.id.fragment_play_reload_button:
