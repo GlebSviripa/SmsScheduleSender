@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SendSmsApp</string>
+    <string name="schedule_sending">Schedule sending</string>
+    <string name="send_immediately">send immediately</string>
+</resources>
