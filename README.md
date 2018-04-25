@@ -1,2 +1,2 @@
 # SwingRadio
-My simple project of online radio. 
+Android application for my online radio swingradio.in.ua
