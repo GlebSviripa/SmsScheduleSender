@@ -4,7 +4,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
-import android.support.v7.app.NotificationCompat
+import android.support.v4.app.NotificationCompat
 
 import com.jeronimo.swingradio.MainActivity
 import com.jeronimo.swingradio.PlayService
